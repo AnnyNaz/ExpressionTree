@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "ExpressionTree.h" // puts implementation of AbstractNode, NumberNode, SumNode, MinusNode, MultiNode classes and parse function here.
-
+#include "ExpressionTree.h" 
 namespace TestSystem
 {
     static bool passed_flag = true;
@@ -94,7 +93,12 @@ int main()
                 new NumberNode(2)))
 
         , 10);
-
+    AbstractNode* t1 = new MultiNode(
+        new NumberNode(2),
+        new SumNode(
+            new NumberNode(3),
+            new NumberNode(2)));
+    std::cout<< t1->print() << std::endl;
     // the second part
 
     parserTest("5", 5);
@@ -106,5 +110,10 @@ int main()
     parserTest("2+3*2-1", 7);
     parserTest("10*4+1+1+3*20", 102);
     parserTest("4-4-4*6-8", -32);
+    parserTest("(10*4+5)", 45);
+    parserTest("(8-4)-(4-2)", 2);
+    parserTest("((10*4+5))", 45);
+    parserTest("(10+20)*3", 90);
+    parserTest("(10+20)*3+5*(10+10)", 190);
     system("pause");
 }
